@@ -1,0 +1,22 @@
+HOUSING PRICE STATISTICS BY CITY
+================================================================================
+
+                     min    max    mean    std  growth
+City                                                  
+Calgary            100.0  284.0  199.52  39.87   184.0
+Greater Toronto    100.0  405.9  208.66  86.38   305.9
+Greater Vancouver  100.0  358.4  229.44  77.29   258.4
+Montreal CMA       100.0  309.1  175.72  62.75   209.1
+Ottawa             100.0  304.8  174.23  58.50   204.8
+
+
+CORRELATION WITH HOUSING PRICE INDEX
+============================================================
+
+Index_MA3                      :  0.999
+Index_Lag1                     :  0.999
+Index_Lag3                     :  0.993
+Index_MA12                     :  0.990
+Index_Lag12                    :  0.965
+Mortgage_5Y                    :  0.066
+Index_YoY_Change               :  0.025
