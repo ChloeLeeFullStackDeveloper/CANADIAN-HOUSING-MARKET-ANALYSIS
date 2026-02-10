@@ -1,40 +1,55 @@
 # Canadian Housing Market Analysis
+
 ## CPSC 4310 - Data Analytics Project
 
-**Team:** Project Group A  
-**Semester:** Spring 2026  
-**Instructor:** [Professor Name]
+**Team:** Project Group A (Chloe Lee, Jiwon Jeon, Ryan Back, Vergin Phan, James Gan)
+**Semester:** Winter 2026  
+**Instructor:** Brahimi, Samiha
 
 ---
 
 ## 📊 **Project Overview**
 
-This project analyzes and predicts housing price trends across 5 major Canadian cities using machine learning models. We achieved **92.5% prediction accuracy** (R²) using historical price data and interest rates.
+This project analyzes and predicts housing price trends across 5 major Canadian cities using machine learning models. We achieved **92.5% exploratory power** (R²) using historical price data and interest rates.
+
+The analysis covers:
+
+- Exploratory Data Analysis (EDA)
+- Feature engineering
+- Baseline and advanced predictive models
+- Visual storytelling for decision support
 
 ### **Objectives:**
+
 1. Analyze 20 years of Canadian housing market data (2005-2025)
 2. Identify key factors influencing price changes
 3. Build predictive models for monthly price forecasting
 4. Create interactive dashboard for stakeholder use
 
-### **Cities Analyzed:**
-- Greater Vancouver
-- Greater Toronto
-- Calgary
-- Ottawa
-- Montreal
+### **Data Sources: **
+
+- **Housing Prices**
+
+  - MLS Home Price Index
+  - Monthly data by city and house type
+  - Cities: Vancouver, Toronto, Calgary, Ottawa, Montreal
+
+- **Interest Rates**
+  - Bank of Canada
+  - Daily rates aggregated to monthly level
+  - Mortgage (1Y / 3Y / 5Y), Prime Rate
 
 ---
 
 ## 👥 **Team Members & Roles**
 
-| Name | Role | Responsibilities |
-|------|------|-----------------|
-| **Jiwon** | Data Collection & Cleaning | Sourced MLS and Bank of Canada data |
-| **James** | Data Integration | Merged datasets, quality assurance |
-| **Chloe** | EDA & Modeling | Feature engineering, model development |
-| **Vergil** | Visualization | Tableau dashboard creation |
-| **Ryan** | Documentation | Final report and presentation |
+| Name       | Role                       | Responsibilities                       |
+| ---------- | -------------------------- | -------------------------------------- |
+| **Jiwon**  | Data Collection & Cleaning | Sourced MLS and Bank of Canada data    |
+| **James**  | Data Integration           | Merged datasets, quality assurance     |
+| **Chloe**  | EDA & Modeling             | Feature engineering, model development |
+| **Vergil** | Visualization              | Tableau dashboard creation             |
+| **Ryan**   | Documentation              | Final report and presentation          |
 
 ---
 
@@ -50,15 +65,16 @@ CANADIAN-HOUSING-MARKET-ANALYSIS/
 │   └── QUICK_START.md                  # 5-minute setup
 │
 ├── 01_Data/                            # Raw datasets
-│   ├── Daily_Rates_in_.csv            # Bank of Canada rates
-│   └── Monthly_Home_Price_and_Index_by_type_and_city_in_.csv
+│   ├── Daily Rates(in).csv             # Bank of Canada rates
+│   └── Monthly Home Price and Index by type and city(in).csv  # # Monthly home prices & price index by city and house type (Canada)
 │
-├── 02_Notebooks/                       # Jupyter notebooks
+├── 02_Notebooks/                      # Jupyter notebooks
+|   ├── 01_data_validation.ipynb       # Data validation & quality checks
 │   ├── Housing_Analysis_EDA.ipynb     # Exploratory analysis
 │   ├── Baseline_Model.ipynb           # Linear regression
 │   └── Advanced_Models.ipynb          # RF & XGBoost
 │
-└── 03_Results/                         # Model outputs
+└── 03_Results/                        # Model outputs
     ├── final_predictions.csv          # Deployment-ready predictions
     ├── model_comparison.csv           # Performance metrics
     ├── baseline_model_performance.csv
@@ -78,6 +94,7 @@ CANADIAN-HOUSING-MARKET-ANALYSIS/
 ## 🚀 **Quick Start**
 
 ### **Prerequisites:**
+
 - Python 3.9 or higher (64-bit)
 - Jupyter Notebook
 - 2GB free disk space
@@ -106,25 +123,29 @@ jupyter notebook
 
 ### **Model Performance:**
 
-| Model | R² | RMSE | MAPE | Status |
-|-------|-------|------|------|--------|
+| Model                 | R²        | RMSE  | MAPE  | Status      |
+| --------------------- | --------- | ----- | ----- | ----------- |
 | **Linear Regression** | **0.925** | 0.252 | 51.9% | ✅ **Best** |
-| Random Forest | 0.906 | 0.282 | 89.2% | Good |
-| XGBoost | 0.908 | 0.278 | 80.7% | Good |
+| Random Forest         | 0.906     | 0.282 | 89.2% | Good        |
+| XGBoost               | 0.908     | 0.278 | 80.7% | Good        |
 
 **Winner:** Linear Regression (92.5% accuracy)
+\*\* Note: MAPE is inflated due to low baseline prices in early years (2005–2007).
 
 ### **Key Findings:**
 
 1. **Past prices are strongest predictors**
+
    - Previous month's index: 52% feature importance
    - 3-month moving average: 18% importance
 
 2. **Interest rates have moderate impact**
+
    - 5-year mortgage rate: 8% importance
    - Lag effect of 3-6 months observed
 
 3. **City-specific patterns:**
+
    - **Most predictable:** Calgary (lowest volatility)
    - **Most volatile:** Toronto (highest price swings)
    - **Highest growth:** Toronto (+305.9% since 2005)
@@ -139,10 +160,12 @@ jupyter notebook
 ## 🔬 **Methodology**
 
 ### **Data Sources:**
+
 - **MLS Home Price Index:** Statistics Canada (2005-2025)
 - **Interest Rates:** Bank of Canada (2005-2025)
 
 ### **Features Engineered (13 total):**
+
 - **Lag features:** Index_Lag1, Index_Lag3, Index_Lag12
 - **Changes:** MoM, YoY, Mortgage rate changes
 - **Rolling averages:** MA3, MA12
@@ -150,11 +173,13 @@ jupyter notebook
 - **Derived:** Price_Above_MA3, MA3_MA12_Diff
 
 ### **Models Developed:**
+
 1. **Linear Regression** (Baseline)
 2. **Random Forest** (100 trees, depth 15)
 3. **XGBoost** (100 estimators, lr 0.1)
 
 ### **Evaluation Metrics:**
+
 - **R²** (variance explained)
 - **RMSE** (root mean squared error)
 - **MAE** (mean absolute error)
@@ -164,35 +189,55 @@ jupyter notebook
 
 ## 📈 **Notebooks Guide**
 
-### **1. Housing_Analysis_EDA.ipynb**
+### **#1. 01_data_validation.ipynb**
+
+**Purpose:** Data validation & quality checks  
+**Runtime:** ~1 minute  
+**Outputs:** Validation summary, coverage checks, sanity plots
+
+**Key Sections:**
+
+- Raw data loading (rates & housing)
+- Date range & frequency validation
+- Missing value analysis
+- Column & data type verification
+- Final validation overview chart
+
+### **2. Housing_Analysis_EDA.ipynb**
+
 **Purpose:** Exploratory Data Analysis  
 **Runtime:** ~5 minutes  
 **Outputs:** 6 visualizations, feature-engineered dataset
 
 **Key Sections:**
+
 - Data loading & cleaning
 - Trend analysis by city
 - Correlation analysis
 - Feature engineering
 - Statistical summaries
 
-### **2. Baseline_Model.ipynb**
+### **3. Baseline_Model.ipynb**
+
 **Purpose:** Linear Regression baseline  
 **Runtime:** ~2 minutes  
 **Outputs:** Baseline performance metrics
 
 **Key Sections:**
+
 - Train/test split (time-based)
 - Linear regression training
 - Performance evaluation
 - Actual vs Predicted visualization
 
-### **3. Advanced_Models.ipynb**
+### **4. Advanced_Models.ipynb**
+
 **Purpose:** Random Forest & XGBoost  
 **Runtime:** ~5 minutes  
 **Outputs:** Final predictions, model comparison
 
 **Key Sections:**
+
 - Random Forest training
 - XGBoost training
 - Model comparison
@@ -204,18 +249,21 @@ jupyter notebook
 ## 📊 **Deliverables**
 
 ### **For Vergil (Tableau Dashboard):**
+
 - ✅ `final_predictions.csv` - Deployment-ready predictions
 - ✅ `model_comparison.csv` - Performance metrics
 - ✅ Dashboard design suggestions
 
 ### **For Ryan (Presentation):**
+
 - ✅ Model performance comparison
 - ✅ Key findings summary
 - ✅ 6 visualization charts
 - ✅ Feature importance rankings
 
 ### **For Professor:**
-- ✅ All 3 Jupyter notebooks (with outputs)
+
+- ✅ All 4 Jupyter notebooks (with outputs)
 - ✅ Final report (Milestone 3)
 - ✅ Complete project package
 
@@ -224,12 +272,14 @@ jupyter notebook
 ## 🔧 **Technical Details**
 
 ### **System Requirements:**
+
 - **OS:** Windows, Mac, or Linux
 - **Python:** 3.9, 3.10, or 3.11 (64-bit)
 - **RAM:** 4GB minimum, 8GB recommended
 - **Disk:** 2GB free space
 
 ### **Dependencies:**
+
 ```
 pandas >= 2.0.0
 numpy >= 1.24.0
@@ -241,6 +291,7 @@ jupyter >= 1.0.0
 ```
 
 ### **Tested On:**
+
 - ✅ macOS 14 (Sonoma)
 - ✅ Windows 11
 - ✅ Ubuntu 22.04
@@ -252,11 +303,29 @@ jupyter >= 1.0.0
 ### **For Team Members:**
 
 **If you're setting up for the first time:**
+
 1. Read `00_Setup/QUICK_START.md`
 2. Install packages: `pip install -r requirements.txt`
 3. Open notebooks in order (EDA → Baseline → Advanced)
 
+### 🧠 Jupyter Kernel Selection (Required)
+
+This kernel ensures consistent package versions across all environments.
+All notebooks in this project were developed and tested using the following kernel:
+
+- **Kernel:** `Python (Housing)`
+
+When opening a notebook in Jupyter, please select this kernel if prompted.
+
+If you see a kernel selection dialog:
+
+1. Choose **Python (Housing)**
+2. Click **Select**
+3. Run all cells from top to bottom
+
+⚠️ Using a different kernel may result in missing packages or execution errors.
 **If you encounter issues:**
+
 1. Check `00_Setup/INSTALLATION_GUIDE.md`
 2. Verify Python version: `python --version` (must be 3.9+)
 3. Contact Chloe for technical help
@@ -286,31 +355,34 @@ jupyter notebook 02_Notebooks/Advanced_Models.ipynb
 
 ## 🎯 **Project Timeline**
 
-| Week | Milestone | Status |
-|------|-----------|--------|
-| 1-2 | Topic Selection & Data Collection | ✅ Complete |
-| 3-4 | Data Cleaning & Integration | ✅ Complete |
-| 5-6 | Exploratory Data Analysis | ✅ Complete |
-| 7 | Baseline Model (Milestone 2) | ✅ Complete |
-| 8-10 | Advanced Modeling | ✅ Complete |
-| 11 | Dashboard & Final Report (Milestone 3) | ✅ Complete |
-| 12 | Final Presentation | 🔄 In Progress |
+| Week | Milestone                              | Status         |
+| ---- | -------------------------------------- | -------------- |
+| 1-2  | Topic Selection & Data Collection      | ✅ Complete    |
+| 3-4  | Data Cleaning & Integration            | ✅ Complete    |
+| 5-6  | Exploratory Data Analysis              | ✅ Complete    |
+| 7    | Baseline Model (Milestone 2)           | ✅ Complete    |
+| 8-10 | Advanced Modeling                      | ✅ Complete    |
+| 11   | Dashboard & Final Report (Milestone 3) | ✅ Complete    |
+| 12   | Final Presentation                     | 🔄 In Progress |
 
 ---
 
 ## 🔍 **Key Insights**
 
 ### **1. Market Dynamics:**
+
 - Strong **autocorrelation** in housing prices (R² = 0.925)
 - Short-term trends (3-month MA) more predictive than long-term
 - Interest rate changes take 3-6 months to impact prices
 
 ### **2. City Comparisons:**
+
 - **Toronto:** Highest growth (+305.9%) but most volatile
 - **Vancouver:** Second highest (+258.4%), strong fundamentals
 - **Calgary:** Most stable, lowest volatility (σ = 39.87)
 
 ### **3. Predictive Power:**
+
 - Past month's price explains 52% of next month's movement
 - Moving averages capture trend momentum effectively
 - Interest rates have moderate but consistent impact (8%)
@@ -320,30 +392,38 @@ jupyter notebook 02_Notebooks/Advanced_Models.ipynb
 ## 📞 **Contact & Support**
 
 ### **Technical Issues:**
+
 **Chloe Lee (EDA & Modeling)**
-- Email: [your email]
+
+- Email: chloelee.lee@uleth.ca
 - Best for: Python, Jupyter, model questions
 
 ### **Data Questions:**
+
 **James (Data Integration)**
+
 - Best for: Dataset structure, missing values
 
 ### **Dashboard:**
+
 **Vergil (Visualization)**
+
 - Best for: Tableau, dashboard features
 
 ---
 
 ## 📄 **License & Academic Integrity**
 
-This project is submitted for CPSC 4310 - Data Analytics at [University Name].
+This project is submitted for CPSC 4310 - Data Analytics at University of Lethbridge.
 
 **Academic Use Only:**
+
 - This code is for educational purposes
 - Do not use for commercial applications
 - Cite appropriately if referencing
 
 **Data Sources:**
+
 - Statistics Canada (MLS Home Price Index)
 - Bank of Canada (Interest Rates)
 
@@ -351,7 +431,7 @@ This project is submitted for CPSC 4310 - Data Analytics at [University Name].
 
 ## 🙏 **Acknowledgments**
 
-- **Professor [Name]** for guidance and feedback
+- **Professor Brahimi, Samiha ** for guidance and feedback
 - **Statistics Canada** for MLS data access
 - **Bank of Canada** for public interest rate data
 - **scikit-learn & XGBoost** communities for excellent documentation
@@ -361,6 +441,7 @@ This project is submitted for CPSC 4310 - Data Analytics at [University Name].
 ## 📈 **Future Work**
 
 ### **Potential Improvements:**
+
 1. **Real-time updates:** Monthly model retraining
 2. **Additional features:** Immigration data, housing starts, unemployment
 3. **City-specific models:** Separate models per market
@@ -368,6 +449,7 @@ This project is submitted for CPSC 4310 - Data Analytics at [University Name].
 5. **API deployment:** Real-time prediction service
 
 ### **Research Extensions:**
+
 - Neighborhood-level predictions
 - External factors integration (policy, immigration)
 - Multi-step forecasting (3, 6, 12 months ahead)
@@ -389,6 +471,7 @@ This project is submitted for CPSC 4310 - Data Analytics at [University Name].
 ## ✅ **Checklist for Users**
 
 Before running notebooks:
+
 - [ ] Python 3.9+ installed
 - [ ] All packages installed (`pip install -r requirements.txt`)
 - [ ] Jupyter notebook working
@@ -396,6 +479,7 @@ Before running notebooks:
 - [ ] Sufficient disk space (2GB+)
 
 For successful execution:
+
 - [ ] Run notebooks in order (EDA → Baseline → Advanced)
 - [ ] Allow 10-15 minutes total runtime
 - [ ] Check `03_Results/` for outputs
@@ -406,6 +490,7 @@ For successful execution:
 ## 🎓 **Learning Outcomes**
 
 Through this project, we gained experience in:
+
 - **Data Wrangling:** Cleaning, merging, feature engineering
 - **Statistical Analysis:** Correlation, trend analysis, visualization
 - **Machine Learning:** Regression models, ensemble methods
