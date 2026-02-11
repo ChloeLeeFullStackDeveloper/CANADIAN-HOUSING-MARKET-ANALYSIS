@@ -7,7 +7,7 @@
 
 ### **Step 1: Install Python**
 - Download: https://www.python.org/downloads/
-- Get Python 3.9 or higher
+- Get Python 3.9 or higher — **64-bit version!**
 - ✅ Check "Add to PATH" during install
 
 ### **Step 2: Install Packages**
@@ -24,7 +24,13 @@ brew install libomp
 pip install xgboost
 ```
 
-**Still fails?** Skip XGBoost - Random Forest works great!
+**Still fails?** Check if your Python is 64-bit:
+```bash
+python3 -c "import struct; print(struct.calcsize('P') * 8, 'bit')"
+```
+If it says 32-bit, reinstall Python (64-bit) from python.org.
+
+**XGBoost still won't work?** Skip it — Random Forest works great!
 
 ### **Step 3: Run Jupyter**
 
@@ -63,7 +69,7 @@ python -m pip install pandas numpy matplotlib seaborn scikit-learn jupyter
 
 ### **Still stuck?**
 - See `INSTALLATION_GUIDE.md` for detailed help
-- Contact Chloe
+- Contact Chloe: chloelee.lee@uleth.ca
 
 ---
 

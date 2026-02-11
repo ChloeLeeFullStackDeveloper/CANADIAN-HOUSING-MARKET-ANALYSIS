@@ -2,7 +2,7 @@
 
 ## CPSC 4310 - Data Analytics Project
 
-**Team:** Project Group A (Chloe Lee, Jiwon Jeon, Ryan Back, Vergin Phan, James Gan)
+**Team:** Project Group A (Chloe Lee, Jiwon Jeon, Ryan Back, Vergil Phan, James Gan)
 **Semester:** Winter 2026  
 **Instructor:** Brahimi, Samiha
 
@@ -26,11 +26,11 @@ The analysis covers:
 3. Build predictive models for monthly price forecasting
 4. Create interactive dashboard for stakeholder use
 
-### **Data Sources: **
+### **Data Sources:**
 
 - **Housing Prices**
 
-  - MLS Home Price Index (via Statistics Canada) (via Statistics Canada)
+  - MLS Home Price Index (via Statistics Canada)
   - Monthly data by city and house type
   - Cities: Vancouver, Toronto, Calgary, Ottawa, Montreal
 
@@ -66,10 +66,10 @@ CANADIAN-HOUSING-MARKET-ANALYSIS/
 │
 ├── 01_Data/                            # Raw datasets
 │   ├── Daily Rates(in).csv             # Bank of Canada rates
-│   └── Monthly Home Price and Index by type and city(in).csv  # # Monthly home prices & price index by city and house type (Canada)
+│   └── Monthly Home Price and Index by type and city(in).csv  # Monthly home prices & price index by city and house type (Canada)
 │
 ├── 02_Notebooks/                      # Jupyter notebooks
-|   ├── 01_data_validation.ipynb       # Data validation & quality checks
+│   ├── 01_data_validation.ipynb       # Data validation & quality checks
 │   ├── Housing_Analysis_EDA.ipynb     # Exploratory analysis
 │   ├── Baseline_Model.ipynb           # Linear regression
 │   └── Advanced_Models.ipynb          # RF & XGBoost
@@ -80,13 +80,20 @@ CANADIAN-HOUSING-MARKET-ANALYSIS/
     ├── baseline_model_performance.csv
     ├── baseline_predictions.csv
     ├── baseline_feature_importance.csv
+    ├── rf_feature_importance.csv
+    ├── xgb_feature_importance.csv
+    ├── housing_data_with_features.csv
     └── visualization/                  # Charts & graphs
         ├── 1_price_trends.png
         ├── 2_interest_rates.png
         ├── 3_dual_axis_vancouver.png
         ├── 4_correlation_heatmap.png
         ├── 5_boxplot_by_city.png
-        └── 6_yoy_trends.png
+        ├── 6_yoy_trends.png
+        ├── 7_actual_vs_predicted.png
+        ├── 8_model_comparison.png
+        ├── 9_rf_feature_importance.png
+        └── 10_xgb_feature_importance.png
 ```
 
 ---
@@ -129,8 +136,8 @@ jupyter notebook
 | Random Forest         | 0.906     | 0.282 | 89.2% | Good        |
 | XGBoost               | 0.908     | 0.278 | 80.7% | Good        |
 
-**Winner:** Linear Regression (92.5% accuracy)
-\*\* Note: MAPE is inflated due to low baseline prices in early years (2005–2007).
+**Winner:** Linear Regression (92.5% accuracy)  
+**Note:** MAPE is inflated due to low baseline prices in early years (2005–2007).
 
 ### **Key Findings:**
 
@@ -262,7 +269,7 @@ The resulting dataset was saved as housing_data_with_features.csv for reproducib
 
 - ✅ Model performance comparison
 - ✅ Key findings summary
-- ✅ 6 visualization charts
+- ✅ 10 visualization charts
 - ✅ Feature importance rankings
 
 ### **For Professor:**
@@ -328,6 +335,7 @@ If you see a kernel selection dialog:
 3. Run all cells from top to bottom
 
 ⚠️ Using a different kernel may result in missing packages or execution errors.
+
 **If you encounter issues:**
 
 1. Check `00_Setup/INSTALLATION_GUIDE.md`
@@ -428,14 +436,14 @@ This project is submitted for CPSC 4310 - Data Analytics at University of Lethbr
 
 **Data Sources:**
 
-- Statistics Canada (MLS Home Price Index (via Statistics Canada))
+- Statistics Canada (MLS Home Price Index)
 - Bank of Canada (Interest Rates)
 
 ---
 
 ## 🙏 **Acknowledgments**
 
-- **Professor Brahimi, Samiha ** for guidance and feedback
+- **Professor Brahimi, Samiha** for guidance and feedback
 - **Statistics Canada** for MLS data access
 - **Bank of Canada** for public interest rate data
 - **scikit-learn & XGBoost** communities for excellent documentation
@@ -467,7 +475,7 @@ This project is submitted for CPSC 4310 - Data Analytics at University of Lethbr
 - **Data Points Analyzed:** 7,560 (20 years × 5 cities × 6 house types)
 - **Features Engineered:** 13
 - **Models Tested:** 3
-- **Visualizations Created:** 6 core EDA charts + supporting plots
+- **Visualizations Created:** 10
 - **Model Performance:** R² = 0.925
 
 ---
@@ -503,11 +511,6 @@ Through this project, we gained experience in:
 - **Communication:** Documentation, presentation, dashboards
 
 ---
-## 🔮 Future Work
-
-Future work may extend this analysis by developing regression or time-series
-forecasting models to predict future housing price trends using the engineered
-lag, rolling average, and momentum features.
 
 **Last Updated:** February 10, 2026  
 **Version:** 1.0  

@@ -25,7 +25,7 @@ Choose the method that works best for you!
 Download these files from our shared folder:
 - `requirements.txt`
 - All `.ipynb` notebooks
-- `data/` folder with CSV files
+- `01_Data/` folder with CSV files
 
 ### **Step 2: Open Terminal/Command Prompt**
 
@@ -143,14 +143,19 @@ Then install to that Python:
 
 ### **Problem 3: XGBoost Won't Install (Mac)**
 
-**Error:** `XGBoost Library could not be loaded`
+**Error:** `XGBoost Library could not be loaded` or `Library not loaded: @rpath/libomp.dylib`
 
-**Solution:**
+#### **Step 1: Check if you have 32-bit Python (common cause)**
+```bash
+python3 -c "import struct; print('64-bit' if struct.calcsize('P') == 8 else '32-bit')"
+```
 
-#### **Option A: Install OpenMP**
+If it says **32-bit**, reinstall Python from https://www.python.org/downloads/ and make sure to download the **64-bit** version.
+
+#### **Option A: Install OpenMP (try this first)**
 ```bash
 brew install libomp
-pip uninstall xgboost
+pip uninstall xgboost -y
 pip install xgboost
 ```
 
@@ -191,14 +196,23 @@ Make sure your folder looks like this:
 
 ```
 CANADIAN-HOUSING-MARKET-ANALYSIS/
-├── requirements.txt                    ← Install file
-├── data/
-│   ├── Daily_Rates_in_.csv
-│   └── Monthly_Home_Price_and_Index_by_type_and_city_in_.csv
-├── output/                             ← Will be created automatically
-├── Housing_Analysis_EDA.ipynb
-├── Baseline_Model.ipynb
-└── Advanced_Models.ipynb
+├── 00_Setup/
+│   ├── README.md
+│   ├── requirements.txt
+│   ├── INSTALLATION_GUIDE.md
+│   └── QUICK_START.md
+├── 01_Data/
+│   ├── Daily Rates(in).csv
+│   └── Monthly Home Price and Index by type and city(in).csv
+├── 02_Notebooks/
+│   ├── 01_data_validation.ipynb
+│   ├── Housing_Analysis_EDA.ipynb
+│   ├── Baseline_Model.ipynb
+│   └── Advanced_Models.ipynb
+└── 03_Results/
+    ├── final_predictions.csv
+    ├── model_comparison.csv
+    └── visualization/
 ```
 
 ---
@@ -254,7 +268,7 @@ Browser should open with Jupyter interface.
 #### **1. Install Python**
 
 - Go to: https://www.python.org/downloads/
-- Download: Python 3.11 (or 3.10, 3.9)
+- Download: Python 3.11 (or 3.10, 3.9) — **make sure it's 64-bit!**
 - **IMPORTANT:** Check "Add Python to PATH" during installation!
 
 #### **2. Verify Installation**
@@ -311,6 +325,7 @@ Click on `Housing_Analysis_EDA.ipynb`
 - Use Terminal
 - If pip doesn't work, use: `pip3 install ...`
 - For XGBoost issues: `brew install libomp`
+- Make sure Python is **64-bit**: `python3 -c "import struct; print(struct.calcsize('P') * 8, 'bit')"`
 
 ### **For Anaconda Users:**
 - Always use `conda install` when possible
@@ -344,7 +359,7 @@ If you're stuck:
 ## 📞 **Contact**
 
 **Chloe (EDA & Modeling):**
-- Email: [your email]
+- Email: chloelee.lee@uleth.ca
 - Best for: Python/Jupyter/ML questions
 
 **James (Data Integration):**
@@ -361,7 +376,7 @@ You only need to install if you want to:
 
 Otherwise:
 - Use the CSV files we provide
-- Use the PNG visualizations
+- Use the PNG visualizations in `03_Results/visualization/`
 
 ---
 
@@ -378,7 +393,7 @@ Otherwise:
 
 ## 🎯 **Success Checklist**
 
-- [ ] Python 3.9+ installed
+- [ ] Python 3.9+ (64-bit) installed
 - [ ] All packages installed (no import errors)
 - [ ] Jupyter notebook opens in browser
 - [ ] Can run cells in notebooks
@@ -404,6 +419,6 @@ Otherwise:
 
 ---
 
-**Last Updated:** February 9, 2026  
-**Version:** 1.0  
+**Last Updated:** February 10, 2026  
+**Version:** 1.1  
 **Created by:** Chloe Lee

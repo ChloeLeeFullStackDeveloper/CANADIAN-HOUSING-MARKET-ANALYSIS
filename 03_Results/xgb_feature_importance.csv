@@ -1,0 +1,16 @@
+Feature,Importance
+Price_Above_MA3,0.717406
+Month,0.04748503
+Index_Lag1,0.030739333
+Index_YoY_Change,0.028599836
+Index_MA12,0.02540896
+Index_Lag12,0.022848725
+Index_MA3,0.022579057
+Mortgage_1Y,0.019694028
+MA3_MA12_Diff,0.016931042
+Mortgage_5Y_Change,0.016559765
+Index_Lag3,0.015523663
+Prime_Rate,0.010388135
+Mortgage_5Y,0.009287112
+Mortgage_3Y,0.008494566
+Quarter,0.00805478
