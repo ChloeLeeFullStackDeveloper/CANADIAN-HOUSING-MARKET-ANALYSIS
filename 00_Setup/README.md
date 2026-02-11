@@ -10,7 +10,7 @@
 
 ## 📊 **Project Overview**
 
-This project analyzes and predicts housing price trends across 5 major Canadian cities using machine learning models. We achieved **92.5% exploratory power** (R²) using historical price data and interest rates.
+This project analyzes and predicts housing price trends across 5 major Canadian cities using machine learning models. We achieved **R² score of 0.925** using historical price data and interest rates.
 
 The analysis covers:
 
@@ -30,7 +30,7 @@ The analysis covers:
 
 - **Housing Prices**
 
-  - MLS Home Price Index
+  - MLS Home Price Index (via Statistics Canada) (via Statistics Canada)
   - Monthly data by city and house type
   - Cities: Vancouver, Toronto, Calgary, Ottawa, Montreal
 
@@ -161,16 +161,20 @@ jupyter notebook
 
 ### **Data Sources:**
 
-- **MLS Home Price Index:** Statistics Canada (2005-2025)
+- **MLS Home Price Index (via Statistics Canada):** Statistics Canada (2005-2025)
 - **Interest Rates:** Bank of Canada (2005-2025)
 
-### **Features Engineered (13 total):**
+### Feature Engineering
 
-- **Lag features:** Index_Lag1, Index_Lag3, Index_Lag12
-- **Changes:** MoM, YoY, Mortgage rate changes
-- **Rolling averages:** MA3, MA12
-- **Time features:** Month, Quarter, Year
-- **Derived:** Price_Above_MA3, MA3_MA12_Diff
+Time-series–specific features were engineered to capture housing market dynamics:
+
+- Lag features (1, 3, 12 months) to model temporal dependency
+- Month-over-Month (MoM) and Year-over-Year (YoY) percentage changes
+- Rolling averages (3-month, 12-month) to smooth short- and long-term trends
+- Derived momentum features measuring distance from moving averages
+
+All features were generated after sorting the data by date to preserve temporal integrity.
+The resulting dataset was saved as housing_data_with_features.csv for reproducibility.
 
 ### **Models Developed:**
 
@@ -310,7 +314,7 @@ jupyter >= 1.0.0
 
 ### 🧠 Jupyter Kernel Selection (Required)
 
-This kernel ensures consistent package versions across all environments.
+This kernel ensures consistent package versions across environments.
 All notebooks in this project were developed and tested using the following kernel:
 
 - **Kernel:** `Python (Housing)`
@@ -424,7 +428,7 @@ This project is submitted for CPSC 4310 - Data Analytics at University of Lethbr
 
 **Data Sources:**
 
-- Statistics Canada (MLS Home Price Index)
+- Statistics Canada (MLS Home Price Index (via Statistics Canada))
 - Bank of Canada (Interest Rates)
 
 ---
@@ -463,8 +467,8 @@ This project is submitted for CPSC 4310 - Data Analytics at University of Lethbr
 - **Data Points Analyzed:** 7,560 (20 years × 5 cities × 6 house types)
 - **Features Engineered:** 13
 - **Models Tested:** 3
-- **Visualizations Created:** 10+
-- **Prediction Accuracy:** 92.5% (R²)
+- **Visualizations Created:** 6 core EDA charts + supporting plots
+- **Model Performance:** R² = 0.925
 
 ---
 
@@ -499,8 +503,13 @@ Through this project, we gained experience in:
 - **Communication:** Documentation, presentation, dashboards
 
 ---
+## 🔮 Future Work
 
-**Last Updated:** February 9, 2026  
+Future work may extend this analysis by developing regression or time-series
+forecasting models to predict future housing price trends using the engineered
+lag, rolling average, and momentum features.
+
+**Last Updated:** February 10, 2026  
 **Version:** 1.0  
 **Status:** ✅ Complete
 
