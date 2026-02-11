@@ -17,6 +17,7 @@ The analysis covers:
 - Exploratory Data Analysis (EDA)
 - Feature engineering
 - Baseline and advanced predictive models
+- City-specific analysis & investment insights
 - Visual storytelling for decision support
 
 ### **Objectives:**
@@ -24,7 +25,9 @@ The analysis covers:
 1. Analyze 20 years of Canadian housing market data (2005-2025)
 2. Identify key factors influencing price changes
 3. Build predictive models for monthly price forecasting
-4. Create interactive dashboard for stakeholder use
+4. Compare city-specific market dynamics and predictability
+5. Provide short-term market direction forecasts per city
+6. Create interactive dashboard for stakeholder use
 
 ### **Data Sources:**
 
@@ -68,15 +71,16 @@ CANADIAN-HOUSING-MARKET-ANALYSIS/
 │   ├── Daily Rates(in).csv             # Bank of Canada rates
 │   └── Monthly Home Price and Index by type and city(in).csv  # Monthly home prices & price index by city and house type (Canada)
 │
-├── 02_Notebooks/                      # Jupyter notebooks
-│   ├── 01_data_validation.ipynb       # Data validation & quality checks
-│   ├── Housing_Analysis_EDA.ipynb     # Exploratory analysis
-│   ├── Baseline_Model.ipynb           # Linear regression
-│   └── Advanced_Models.ipynb          # RF & XGBoost
+├── 02_Notebooks/                       # Jupyter notebooks
+│   ├── 01_data_validation.ipynb        # Data validation & quality checks
+│   ├── Housing_Analysis_EDA.ipynb      # Exploratory analysis
+│   ├── Baseline_Model.ipynb            # Linear regression
+│   └── Advanced_Models.ipynb           # RF, XGBoost, city analysis & forecasts
 │
-└── 03_Results/                        # Model outputs
-    ├── final_predictions.csv          # Deployment-ready predictions
-    ├── model_comparison.csv           # Performance metrics
+└── 03_Results/                         # Model outputs
+    ├── final_predictions.csv           # Deployment-ready predictions
+    ├── model_comparison.csv            # Performance metrics (all models)
+    ├── city_performance.csv            # City-specific model performance
     ├── baseline_model_performance.csv
     ├── baseline_predictions.csv
     ├── baseline_feature_importance.csv
@@ -93,7 +97,10 @@ CANADIAN-HOUSING-MARKET-ANALYSIS/
         ├── 7_actual_vs_predicted.png
         ├── 8_model_comparison.png
         ├── 9_rf_feature_importance.png
-        └── 10_xgb_feature_importance.png
+        ├── 10_xgb_feature_importance.png
+        ├── 11_city_performance_heatmap.png
+        ├── 12_price_trends_forecast.png
+        └── 13_city_value_comparison.png
 ```
 
 ---
@@ -164,6 +171,45 @@ jupyter notebook
 
 ---
 
+## 🏙️ **City-Specific Analysis**
+
+Each city has unique market dynamics. We trained separate Random Forest models per city to measure individual predictability and volatility.
+
+### **City Performance Heatmap** (`11_city_performance_heatmap.png`)
+
+Compares R², RMSE, MAE, and volatility (σ) across all 5 cities side by side.
+
+### **Key City Insights:**
+
+| City      | Volatility (σ) | Characteristics                          |
+| --------- | -------------- | ---------------------------------------- |
+| Calgary   | Lowest         | Most stable, most predictable            |
+| Montreal  | Low-Medium     | Steady growth, consistent                |
+| Ottawa    | Medium         | Balanced market                          |
+| Vancouver | Medium-High    | Strong fundamentals, high growth         |
+| Toronto   | Highest        | Maximum growth (+305.9%) but most risky  |
+
+---
+
+## 📈 **Market Forecast & Investment Insights**
+
+### **Short-Term Forecast** (`12_price_trends_forecast.png`)
+
+Using the combined RF + XGBoost prediction on the most recent data point, we project the **3-month price direction** for each city. Green arrow = rising, Red arrow = falling.
+
+> ⚠️ This is a short-term directional forecast only (3–6 months). It is based on historical patterns and should not be used as financial advice.
+
+### **City Investment Score** (`13_city_value_comparison.png`)
+
+We ranked cities using a composite score:
+- **40%** — Average monthly growth rate
+- **30%** — Stability (lower volatility = better)
+- **30%** — Predictability (R² score)
+
+The bubble chart shows Growth vs Volatility, where bubble size represents model predictability. Use this to understand the risk/reward tradeoff per city.
+
+---
+
 ## 🔬 **Methodology**
 
 ### **Data Sources:**
@@ -171,7 +217,7 @@ jupyter notebook
 - **MLS Home Price Index (via Statistics Canada):** Statistics Canada (2005-2025)
 - **Interest Rates:** Bank of Canada (2005-2025)
 
-### Feature Engineering
+### **Feature Engineering**
 
 Time-series–specific features were engineered to capture housing market dynamics:
 
@@ -181,13 +227,14 @@ Time-series–specific features were engineered to capture housing market dynami
 - Derived momentum features measuring distance from moving averages
 
 All features were generated after sorting the data by date to preserve temporal integrity.
-The resulting dataset was saved as housing_data_with_features.csv for reproducibility.
+The resulting dataset was saved as `housing_data_with_features.csv` for reproducibility.
 
 ### **Models Developed:**
 
 1. **Linear Regression** (Baseline)
 2. **Random Forest** (100 trees, depth 15)
 3. **XGBoost** (100 estimators, lr 0.1)
+4. **City-Specific Random Forest** (separate model per city)
 
 ### **Evaluation Metrics:**
 
@@ -200,14 +247,13 @@ The resulting dataset was saved as housing_data_with_features.csv for reproducib
 
 ## 📈 **Notebooks Guide**
 
-### **#1. 01_data_validation.ipynb**
+### **1. 01_data_validation.ipynb**
 
 **Purpose:** Data validation & quality checks  
 **Runtime:** ~1 minute  
 **Outputs:** Validation summary, coverage checks, sanity plots
 
 **Key Sections:**
-
 - Raw data loading (rates & housing)
 - Date range & frequency validation
 - Missing value analysis
@@ -221,7 +267,6 @@ The resulting dataset was saved as housing_data_with_features.csv for reproducib
 **Outputs:** 6 visualizations, feature-engineered dataset
 
 **Key Sections:**
-
 - Data loading & cleaning
 - Trend analysis by city
 - Correlation analysis
@@ -235,7 +280,6 @@ The resulting dataset was saved as housing_data_with_features.csv for reproducib
 **Outputs:** Baseline performance metrics
 
 **Key Sections:**
-
 - Train/test split (time-based)
 - Linear regression training
 - Performance evaluation
@@ -243,17 +287,14 @@ The resulting dataset was saved as housing_data_with_features.csv for reproducib
 
 ### **4. Advanced_Models.ipynb**
 
-**Purpose:** Random Forest & XGBoost  
-**Runtime:** ~5 minutes  
-**Outputs:** Final predictions, model comparison
+**Purpose:** RF, XGBoost, city-specific analysis & market forecasts  
+**Runtime:** ~10 minutes  
+**Outputs:** Final predictions, model comparison, city insights, forecast charts
 
 **Key Sections:**
-
-- Random Forest training
-- XGBoost training
-- Model comparison
-- Feature importance analysis
-- Final predictions export
+- Part 1–9: Random Forest & XGBoost training, comparison, feature importance
+- Part 10: City-specific models & performance heatmap
+- Part 11: Historical trends, 3-month forecast, city investment score ranking
 
 ---
 
@@ -263,13 +304,15 @@ The resulting dataset was saved as housing_data_with_features.csv for reproducib
 
 - ✅ `final_predictions.csv` - Deployment-ready predictions
 - ✅ `model_comparison.csv` - Performance metrics
-- ✅ Dashboard design suggestions
+- ✅ `city_performance.csv` - City-specific results
+- ✅ 13 visualization charts
 
 ### **For Ryan (Presentation):**
 
 - ✅ Model performance comparison
 - ✅ Key findings summary
-- ✅ 10 visualization charts
+- ✅ City investment score ranking
+- ✅ 3-month forecast per city
 - ✅ Feature importance rankings
 
 ### **For Professor:**
@@ -321,7 +364,6 @@ jupyter >= 1.0.0
 
 ### 🧠 Jupyter Kernel Selection (Required)
 
-This kernel ensures consistent package versions across environments.
 All notebooks in this project were developed and tested using the following kernel:
 
 - **Kernel:** `Python (Housing)`
@@ -356,7 +398,7 @@ jupyter notebook 02_Notebooks/Housing_Analysis_EDA.ipynb
 jupyter notebook 02_Notebooks/Baseline_Model.ipynb
 # Cell → Run All
 
-# 4. Run Advanced Models
+# 4. Run Advanced Models (includes city analysis & forecasts)
 jupyter notebook 02_Notebooks/Advanced_Models.ipynb
 # Cell → Run All
 
@@ -389,15 +431,22 @@ jupyter notebook 02_Notebooks/Advanced_Models.ipynb
 
 ### **2. City Comparisons:**
 
-- **Toronto:** Highest growth (+305.9%) but most volatile
+- **Toronto:** Highest growth (+305.9%) but most volatile — high risk, high reward
 - **Vancouver:** Second highest (+258.4%), strong fundamentals
-- **Calgary:** Most stable, lowest volatility (σ = 39.87)
+- **Calgary:** Most stable, lowest volatility — easiest to predict
+- **Montreal & Ottawa:** Balanced markets with moderate growth
 
 ### **3. Predictive Power:**
 
 - Past month's price explains 52% of next month's movement
 - Moving averages capture trend momentum effectively
 - Interest rates have moderate but consistent impact (8%)
+
+### **4. Investment Perspective:**
+
+- **Best stability:** Calgary
+- **Best growth potential:** Toronto / Vancouver
+- **Best balance (growth + stability):** See `13_city_value_comparison.png` for full ranking
 
 ---
 
@@ -456,8 +505,8 @@ This project is submitted for CPSC 4310 - Data Analytics at University of Lethbr
 
 1. **Real-time updates:** Monthly model retraining
 2. **Additional features:** Immigration data, housing starts, unemployment
-3. **City-specific models:** Separate models per market
-4. **Prediction intervals:** Add confidence bounds
+3. **City-specific models:** Already implemented — next step is hyperparameter tuning per city
+4. **Prediction intervals:** Add confidence bounds to forecasts
 5. **API deployment:** Real-time prediction service
 
 ### **Research Extensions:**
@@ -471,11 +520,11 @@ This project is submitted for CPSC 4310 - Data Analytics at University of Lethbr
 
 ## 📊 **Project Metrics**
 
-- **Lines of Code:** ~2,000+
+- **Lines of Code:** ~2,500+
 - **Data Points Analyzed:** 7,560 (20 years × 5 cities × 6 house types)
 - **Features Engineered:** 13
-- **Models Tested:** 3
-- **Visualizations Created:** 10
+- **Models Tested:** 3 global + 5 city-specific
+- **Visualizations Created:** 13
 - **Model Performance:** R² = 0.925
 
 ---
@@ -484,7 +533,7 @@ This project is submitted for CPSC 4310 - Data Analytics at University of Lethbr
 
 Before running notebooks:
 
-- [ ] Python 3.9+ installed
+- [ ] Python 3.9+ (64-bit) installed
 - [ ] All packages installed (`pip install -r requirements.txt`)
 - [ ] Jupyter notebook working
 - [ ] CSV files in `01_Data/` folder
@@ -495,7 +544,7 @@ For successful execution:
 - [ ] Run notebooks in order (EDA → Baseline → Advanced)
 - [ ] Allow 10-15 minutes total runtime
 - [ ] Check `03_Results/` for outputs
-- [ ] Verify `final_predictions.csv` created
+- [ ] Verify `final_predictions.csv` and `city_performance.csv` created
 
 ---
 
@@ -505,15 +554,16 @@ Through this project, we gained experience in:
 
 - **Data Wrangling:** Cleaning, merging, feature engineering
 - **Statistical Analysis:** Correlation, trend analysis, visualization
-- **Machine Learning:** Regression models, ensemble methods
+- **Machine Learning:** Regression models, ensemble methods, city-specific modeling
 - **Model Evaluation:** Cross-validation, performance metrics
+- **Market Analysis:** Investment scoring, risk vs reward comparison
 - **Collaboration:** Team workflow, version control
 - **Communication:** Documentation, presentation, dashboards
 
 ---
 
 **Last Updated:** February 10, 2026  
-**Version:** 1.0  
+**Version:** 1.2  
 **Status:** ✅ Complete
 
 ---
