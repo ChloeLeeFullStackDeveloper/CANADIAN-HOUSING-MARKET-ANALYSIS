@@ -107,6 +107,73 @@ jupyter notebook
 
 ---
 
+## **Method 4: Virtual Environment + Jupyter Kernel** ⭐ **RECOMMENDED FOR TEAMS!**
+
+This method creates an isolated environment and registers it as a Jupyter kernel so all team members see the same "Python (Housing)" option.
+
+### **Step 1: Navigate to Project**
+
+```bash
+cd path/to/CANADIAN-HOUSING-MARKET-ANALYSIS
+```
+
+### **Step 2: Create Virtual Environment**
+
+```bash
+python -m venv housing_env
+```
+
+### **Step 3: Activate Environment**
+
+**Mac/Linux:**
+```bash
+source housing_env/bin/activate
+```
+
+**Windows:**
+```bash
+housing_env\Scripts\activate
+```
+
+You should see `(housing_env)` in your terminal prompt.
+
+### **Step 4: Install Packages**
+
+```bash
+pip install -r 00_Setup/requirements.txt
+```
+
+### **Step 5: Register Jupyter Kernel**
+
+```bash
+pip install ipykernel
+python -m ipykernel install --user --name=housing --display-name="Python (Housing)"
+```
+
+This creates the **"Python (Housing)"** kernel that appears in Jupyter's kernel menu.
+
+### **Step 6: Start Jupyter**
+
+```bash
+jupyter notebook
+```
+
+### **Step 7: Select Kernel**
+
+When you open a notebook:
+1. Click **Kernel → Change Kernel**
+2. Select **"Python (Housing)"**
+3. Run cells normally
+
+### **Why Use This Method?**
+
+- ✅ Isolated environment (won't conflict with other projects)
+- ✅ All team members see the same kernel name
+- ✅ Easy to replicate across machines
+- ✅ Clean uninstall (just delete `housing_env/` folder)
+
+---
+
 ## 🔧 **Troubleshooting**
 
 ### **Problem 1: "pip not found"**
@@ -187,6 +254,42 @@ pip install --user -r requirements.txt
 Restart Jupyter kernel:
 - In Jupyter: **Kernel → Restart**
 - Then re-run all cells
+
+---
+
+### **Problem 6: "Python (Housing)" Kernel Not Showing in Jupyter**
+
+**Why this happens:**
+The kernel is registered on one person's computer but not visible to others.
+
+**Solution A: Register the Kernel (Recommended)**
+
+```bash
+# Make sure packages are installed first
+pip install -r 00_Setup/requirements.txt
+
+# Register kernel
+pip install ipykernel
+python -m ipykernel install --user --name=housing --display-name="Python (Housing)"
+
+# Restart Jupyter
+jupyter notebook
+```
+
+Now "Python (Housing)" will appear in Kernel → Change Kernel menu.
+
+**Solution B: Use Any Python Kernel**
+
+You don't *need* the "Python (Housing)" kernel! Just select:
+- "Python 3" 
+- "Python (ipykernel)"
+- Any other Python kernel you see
+
+As long as you've installed the packages (`pip install -r requirements.txt`), the notebooks will run fine.
+
+**Solution C: Create Virtual Environment (Best for Teams)**
+
+Follow **Method 4** above to create a proper virtual environment with kernel registration.
 
 ---
 

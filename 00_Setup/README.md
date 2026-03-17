@@ -362,26 +362,26 @@ jupyter >= 1.0.0
 2. Install packages: `pip install -r requirements.txt`
 3. Open notebooks in order (EDA → Baseline → Advanced)
 
-### 🧠 Jupyter Kernel Selection (Required)
+### 🧠 Jupyter Kernel Selection (Recommended)
 
-All notebooks in this project were developed and tested using the following kernel:
+For consistency across the team, we recommend using the **"Python (Housing)"** kernel.
 
-- **Kernel:** `Python (Housing)`
-
-When opening a notebook in Jupyter, please select this kernel if prompted.
-
-If you see a kernel selection dialog:
-
-1. Choose **Python (Housing)**
+**If you see the kernel menu when opening a notebook:**
+1. Choose **"Python (Housing)"** (if available)
 2. Click **Select**
 3. Run all cells from top to bottom
 
-⚠️ Using a different kernel may result in missing packages or execution errors.
+**If "Python (Housing)" is not available:**
+- Select any available Python kernel (Python 3, ipykernel, etc.)
+- As long as you installed packages (`pip install -r requirements.txt`), the code will run fine
+- To register the "Python (Housing)" kernel, see `00_Setup/INSTALLATION_GUIDE.md` Method 4
+
+⚠️ If you get import errors, the kernel may be using a different Python installation. See troubleshooting below.
 
 **If you encounter issues:**
 
-1. Check `00_Setup/INSTALLATION_GUIDE.md`
-2. Verify Python version: `python --version` (must be 3.9+)
+1. Check `00_Setup/INSTALLATION_GUIDE.md` for detailed kernel setup
+2. Verify Python version: `python --version` (must be 3.9+, 64-bit)
 3. Contact Chloe for technical help
 
 ### **For Replication:**
@@ -562,8 +562,8 @@ Through this project, we gained experience in:
 
 ---
 
-**Last Updated:** February 10, 2026  
-**Version:** 1.2  
+**Last Updated:** February 11, 2026  
+**Version:** 1.3  
 **Status:** ✅ Complete
 
 ---
