@@ -101,6 +101,9 @@ CANADIAN-HOUSING-MARKET-ANALYSIS/
         ├── 11_city_performance_heatmap.png
         ├── 12_price_trends_forecast.png
         └── 13_city_value_comparison.png
+
+📊 Tableau Dashboard (submitted separately):
+Canadian_Housing_Market_Interest_Rate_Analysis.twbx   # Interactive dashboard (Vergil Phan)
 ```
 
 ---
@@ -470,6 +473,7 @@ jupyter notebook 02_Notebooks/Advanced_Models.ipynb
 **Vergil (Visualization)**
 
 - Best for: Tableau, dashboard features
+- Dashboard file: `Canadian_Housing_Market_Interest_Rate_Analysis.twbx` (requires Tableau Desktop or Tableau Public)
 
 ---
 
@@ -562,8 +566,8 @@ Through this project, we gained experience in:
 
 ---
 
-**Last Updated:** February 11, 2026  
-**Version:** 1.3  
+**Last Updated:** April 8, 2026  
+**Version:** 1.4  
 **Status:** ✅ Complete
 
 ---
