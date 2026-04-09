@@ -10,7 +10,7 @@
 
 ## 📊 **Project Overview**
 
-This project analyzes and predicts housing price trends across 5 major Canadian cities using machine learning models. We achieved **R² score of 0.925** using historical price data and interest rates.
+This project analyzes and predicts housing price trends across 5 major Canadian cities using machine learning models. We achieved **R² score of 0.924** using historical price data and interest rates.
 
 The analysis covers:
 
@@ -102,8 +102,8 @@ CANADIAN-HOUSING-MARKET-ANALYSIS/
         ├── 12_price_trends_forecast.png
         └── 13_city_value_comparison.png
 
-📊 Tableau Dashboard (submitted separately):
-Canadian_Housing_Market_Interest_Rate_Analysis.twbx   # Interactive dashboard (Vergil Phan)
+📊 Tableau Dashboard (submitted separately to Moodle):
+Canadian_Housing_Market_Interest_Rate_Analysis.twbx
 ```
 
 ---
@@ -142,11 +142,11 @@ jupyter notebook
 
 | Model                 | R²        | RMSE  | MAPE  | Status      |
 | --------------------- | --------- | ----- | ----- | ----------- |
-| **Linear Regression** | **0.925** | 0.252 | 51.9% | ✅ **Best** |
+| **Linear Regression** | **0.924** | 0.253 | 52.3% | ✅ **Best** |
 | Random Forest         | 0.906     | 0.282 | 89.2% | Good        |
 | XGBoost               | 0.908     | 0.278 | 80.7% | Good        |
 
-**Winner:** Linear Regression (92.5% accuracy)  
+**Winner:** Linear Regression (92.4% accuracy)  
 **Note:** MAPE is inflated due to low baseline prices in early years (2005–2007).
 
 ### **Key Findings:**
@@ -165,7 +165,7 @@ jupyter notebook
 
    - **Most predictable:** Calgary (lowest volatility)
    - **Most volatile:** Toronto (highest price swings)
-   - **Highest growth:** Toronto (+305.9% since 2005)
+   - **Highest growth:** Toronto (+198.9% since 2005)
 
 4. **Major events impact:**
    - 2008 Financial Crisis: All cities declined
@@ -190,7 +190,7 @@ Compares R², RMSE, MAE, and volatility (σ) across all 5 cities side by side.
 | Montreal  | Low-Medium     | Steady growth, consistent                |
 | Ottawa    | Medium         | Balanced market                          |
 | Vancouver | Medium-High    | Strong fundamentals, high growth         |
-| Toronto   | Highest        | Maximum growth (+305.9%) but most risky  |
+| Toronto   | Highest        | Maximum growth (+198.9%) but most risky  |
 
 ---
 
@@ -428,14 +428,14 @@ jupyter notebook 02_Notebooks/Advanced_Models.ipynb
 
 ### **1. Market Dynamics:**
 
-- Strong **autocorrelation** in housing prices (R² = 0.925)
+- Strong **autocorrelation** in housing prices (R² = 0.924)
 - Short-term trends (3-month MA) more predictive than long-term
 - Interest rate changes take 3-6 months to impact prices
 
 ### **2. City Comparisons:**
 
-- **Toronto:** Highest growth (+305.9%) but most volatile — high risk, high reward
-- **Vancouver:** Second highest (+258.4%), strong fundamentals
+- **Toronto:** Highest growth (+198.9%) but most volatile — high risk, high reward
+- **Vancouver:** Second highest (+218.9%), strong fundamentals
 - **Calgary:** Most stable, lowest volatility — easiest to predict
 - **Montreal & Ottawa:** Balanced markets with moderate growth
 
@@ -529,7 +529,7 @@ This project is submitted for CPSC 4310 - Data Analytics at University of Lethbr
 - **Features Engineered:** 13
 - **Models Tested:** 3 global + 5 city-specific
 - **Visualizations Created:** 13
-- **Model Performance:** R² = 0.925
+- **Model Performance:** R² = 0.924
 
 ---
 
@@ -567,7 +567,7 @@ Through this project, we gained experience in:
 ---
 
 **Last Updated:** April 8, 2026  
-**Version:** 1.4  
+**Version:** 1.3  
 **Status:** ✅ Complete
 
 ---
